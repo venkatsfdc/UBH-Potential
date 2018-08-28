@@ -1,0 +1,21 @@
+({
+	myAction : function(component, event, helper) {
+		
+        component.set("v.Columns", [
+    		{label:"Account Name", fieldName:"Name", type:"text"},
+    		{label:"Phone", fieldName:"Phone", type:"phone"},
+    		{label:"Last Modified Date", fieldName:"LastModifiedDate", type:"date"}
+		]);
+
+        var action = component.get("c.getAccounts");
+		action.setParams({
+    		recordId: component.get("v.recordId")
+		});
+		action.setCallback(this, function(data) {
+    		component.set("v.Accounts", data.getReturnValue());
+		});
+		
+        $A.enqueueAction(action);
+
+	}
+})
